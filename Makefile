@@ -6,7 +6,7 @@
 #    By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/18 01:09:31 by ada-cunh          #+#    #+#              #
-#    Updated: 2017/02/21 05:59:28 by ada-cunh         ###   ########.fr        #
+#    Updated: 2017/02/22 03:20:09 by ada-cunh         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -22,6 +22,8 @@ L = 	-L./libft/ -lft -L./minilibx_macos/ -lmlx -framework OpenGL -framework AppK
 SRC	=	srcs/error.c \
 		srcs/init.c \
 		srcs/parser.c \
+		srcs/main.c \
+		srcs/hooks.c \
 
 OBJ	=	$(SRC:srcs/%.c=%.o)
 

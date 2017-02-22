@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/21 01:36:27 by ada-cunh          #+#    #+#             */
-/*   Updated: 2017/02/21 01:42:39 by ada-cunh         ###   ########.fr       */
+/*   Created: 2017/02/22 04:20:16 by ada-cunh          #+#    #+#             */
+/*   Updated: 2017/02/22 04:20:21 by ada-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "libft.h"
-void fdf_error(int n)
+#include "mlx.h"
+
+void drawer(t_env *env)
 {
-	if (n == 1)
+	int			x;
+	int			y;
+	t_points	**map_pts;
+
+	x = 0;
+	map_pts = env->map->points;
+	while (x < env->map->width)
 	{
-		ft_putendl("File does not exist.");
-		exit(0);
-	}
-	else if (n == 2)
-	{
-		ft_putendl("Malloc failed.");
-		exit(-1);
-	}
-	else if (n == 3)
-	{
-		ft_putendl("Open file failed.");
-		exit(-1);
-	}
-	else if (n == 4)
-	{
-		ft_putendl("Map format not valid.");
-		exit (-1);
+		while (y < env->map->height)
+		{
+			proj->x = (sqrt(2) / 2) * (point->x - point->y);
+			proj->y = (sqrt(2 / 3.0) * point->z) - ((1 / sqrt(6)) * (point->x + point->y));
+			y++;
+		}
+		x++;
 	}
 }

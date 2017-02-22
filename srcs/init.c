@@ -11,18 +11,18 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "mlx.h"
 
 int init_windows(t_env *env, t_pos size, char *win_name)
 {
-
+	if (!(env->mlx = mlx_init()))
+		return (0);
 	env->win.win_mlx = mlx_new_window(env->mlx, size.x, size.y, win_name);
-	return (0);
+	env->img.img_ptr = mlx_new_image(env->mlx, size.x, size.y);
+	env->img.data = mlx_get_data_addr(env->img.img_ptr, &env->img.bpp, 
+		&env->img.size, &env->img.endian);
+//	mlx_expose_hook(env->win.win_mlx, &xpose_hook, 0);
+	mlx_key_hook(env->win.win_mlx, &exit_hook, 0);
+//	mlx_mouse_hook(env->win.win_mlx, &hook_mouse, 0);
+	return (1);
 }
-
-int init(t_env *env)
-{
-	env->mlx = mlx_init();
-	return (0);
-}
-
-

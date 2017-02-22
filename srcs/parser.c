@@ -11,9 +11,10 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "mlx.h"
 #include <fcntl.h>
 
-static t_map *set_point(t_map *map, t_list *list)
+static t_map *get_map_fromlst(t_map *map, t_list *list)
 {
 	int x;
 	int y;
@@ -41,7 +42,7 @@ static t_map *set_point(t_map *map, t_list *list)
 	return (map);
 }
 
-t_map *create_list(char *path)
+t_map *get_map(char *path)
 {
 	char	**split;
 	int		fd;
@@ -68,5 +69,5 @@ t_map *create_list(char *path)
 			ft_lstadd(&list, ft_lstnew(&split, sizeof(char **)));
 	}
 	close(fd);
-	return (set_point(map, list));
+	return (get_map_fromlst(map, list));
 }
