@@ -12,7 +12,7 @@
 
 NAME = fdf
 
-FLAGS	= -Wall -Wextra -Werror -O3
+FLAGS	= -Wall -Wextra -Werror -g -O3
 
 I = -I./includes \
 	-I./libft/includes \

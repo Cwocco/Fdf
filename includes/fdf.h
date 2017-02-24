@@ -72,6 +72,7 @@ typedef struct	s_env
 	t_win	win;
 	t_map	*map;
 	t_img	img;
+	//char	*path;
 
 }				t_env;
 
@@ -79,7 +80,7 @@ void	fdf_error(int n);
 t_map 	*get_map(char *path);
 int 	init_windows(t_env *env, t_pos size, char *win_name);
 int 	exit_hook(int keycode, void *param);
-int 	get_color(t_points *p1, t_points *p2);
+//int 	get_color(t_points *p1, t_points *p2);
 void	drawer(t_env *env);
 void	projection_iso(t_map *map);
 void	display_img(t_env *env);

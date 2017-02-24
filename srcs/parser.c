@@ -15,7 +15,6 @@
 #include <fcntl.h>
 #include "libft.h"
 
-/*
 static t_map	*get_map_fromlst(t_map *map, t_list *list)
 {
 	int			x;
@@ -23,9 +22,10 @@ static t_map	*get_map_fromlst(t_map *map, t_list *list)
 
 	if (!(map->points = (t_points **)malloc(sizeof(t_points *) * map->height)))
 		fdf_error(2);
-	y = map->height - 1;
+	y = 0;
 	while (list && map)
 	{
+		ft_putendl(((char **)list->content)[0]);
 		if (!(map->points[y] = (t_points *)malloc(sizeof(t_points) * map->width)))
 			fdf_error(2);
 		x = 0;
@@ -35,15 +35,15 @@ static t_map	*get_map_fromlst(t_map *map, t_list *list)
 			map->points[y][x].y = y;
 		//	if (!ft_strdigit(((char **)list->content)[x]))
 			//	fdf_error(4);
-			map->points[y][x].z = atoi(((char **)list->content)[x]);
+			map->points[y][x].z = ft_atoi(((char **)list->content)[x]);
+//			ft_putstr(&((char*)list->content)[0]);
 			x++;
 		}
-		y--;
+		y++;
 		list = list->next;
 	}
 	return (map);
 }
-*/
 
 t_map			*get_map(char *path)
 {
@@ -57,12 +57,13 @@ t_map			*get_map(char *path)
 	if (!(map = (t_map *)malloc(sizeof(t_map))))
 		fdf_error(2);
 	ft_putendl("Test2");
-	map->height = 0;
 	map->width	= 0;
+	map->height = 0;
 	if (!(fd = open(path, O_RDONLY)))
 		fdf_error(1);
 	while (get_next_line(fd, &path) > 0)
 	{
+		ft_putendl(path);
 		split = ft_strsplit(path, ' ');
 		ft_strdel(&path);
 		if (map->height++ == 0)
@@ -72,10 +73,12 @@ t_map			*get_map(char *path)
 			if (!(list = ft_lstnew(&split, sizeof(char **))))
 				fdf_error(2);
 			ft_putendl("Test4");
+			//ft_putstr((char*)list);
 		}
 		else 
 			ft_lstadd(&list, ft_lstnew(&split, sizeof(char **)));
 		ft_putendl("Test5");
+		
 	}
 	close(fd);
 	ft_putendl("Test6");

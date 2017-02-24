@@ -14,7 +14,7 @@
 #include "libft.h"
 #include "fdf.h"
 
-int		get_color(t_points *p1, t_points *p2)
+/*int		get_color(t_points *p1, t_points *p2)
 {
 	int colors;
 	int z;
@@ -36,3 +36,4 @@ int		get_color(t_points *p1, t_points *p2)
 		colors = 0;
 	return (colors);
 }
+*/

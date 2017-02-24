@@ -21,6 +21,7 @@ int main(int argc, char **argv)
 	argc++;
 	size.x = 1920;
 	size.y = 1080;
+	//env.path = argv[1];
 	init_windows(&env, size, argv[0]);
 	mlx_loop(env.mlx);
 	return (0);

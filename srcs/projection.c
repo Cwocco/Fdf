@@ -61,11 +61,10 @@ void			projection_iso(t_map *map)
 		y = 0;
 		while (y < map->height)
 		{
-
 			pts = &map->points[y][x];
 			proj_pts = &pts->project;
-			proj_pts->x = (sqrt(2) / 2) * (pts->x - pts->y);
-			proj_pts->y = (sqrt(2 / 3.0) * pts->z) - ((1 / sqrt(6)) * (pts->x + pts->y));
+			proj_pts->x = (sqrt(2) / 2.0) * (pts->x - pts->y);
+			proj_pts->y = (sqrt(2 / 3.0) * pts->z) - ((1.0 / sqrt(6)) * (pts->x + pts->y));
 			get_new_min(map, pts);
 			get_new_max(map, pts);
 			y++;
