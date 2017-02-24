@@ -16,21 +16,23 @@
 # include "mlx.h"
 # include "libft.h"
 # include "get_next_line.h"
+# include <math.h>
 
 typedef struct s_2dpos
 {
 	double 		x;
 	double		y;
 }				t_2dpos;
-			^^
+			
 typedef struct s_points
 {
 	int			x;
 	int 		y;
 	int 		z;
+	int 		z_color;
 	t_2dpos		project;
 }				t_points;
-            ^^
+            
 typedef struct 	s_map
 {
 	t_points	**points;
@@ -41,13 +43,13 @@ typedef struct 	s_map
 	t_2dpos		max;
 
 }				t_map;
-			^^
+			
 typedef struct	s_pos
 {
 	int 		x;
 	int		 	y;
 }				t_pos;
-			^^
+			
 typedef struct	s_win
 {
 	void		*win_mlx;
@@ -73,10 +75,14 @@ typedef struct	s_env
 
 }				t_env;
 
-void fdf_error(int n);
-t_map *get_map(char *path);
-int init_windows(t_env *env, t_pos size, char *win_name);
-int exit_hook(int keycode, void *param);
-
+void	fdf_error(int n);
+t_map 	*get_map(char *path);
+int 	init_windows(t_env *env, t_pos size, char *win_name);
+int 	exit_hook(int keycode, void *param);
+int 	get_color(t_points *p1, t_points *p2);
+void	drawer(t_env *env);
+void	projection_iso(t_map *map);
+void	display_img(t_env *env);
+int 	xpose_hook(void *param);
 
 #endif

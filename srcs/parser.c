@@ -13,11 +13,12 @@
 #include "fdf.h"
 #include "mlx.h"
 #include <fcntl.h>
+#include "libft.h"
 
-static t_map *get_map_fromlst(t_map *map, t_list *list)
+static t_map	*get_map_fromlst(t_map *map, t_list *list)
 {
-	int x;
-	int y;
+	int			x;
+	int			y;
 
 	if (!(map->points = (t_points **)malloc(sizeof(t_points *) * map->height)))
 		fdf_error(2);
@@ -42,12 +43,12 @@ static t_map *get_map_fromlst(t_map *map, t_list *list)
 	return (map);
 }
 
-t_map *get_map(char *path)
+t_map			*get_map(char *path)
 {
-	char	**split;
-	int		fd;
-	t_list	*list;
-	t_map	*map;
+	char		**split;
+	int			fd;
+	t_list		*list;
+	t_map		*map;
 
 	if (!(map = (t_map *)malloc(sizeof(t_map))))
 		fdf_error(2);

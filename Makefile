@@ -24,6 +24,9 @@ SRC	=	srcs/error.c \
 		srcs/parser.c \
 		srcs/main.c \
 		srcs/hooks.c \
+		srcs/color.c \
+		srcs/projection.c \
+		srcs/draw.c \
 
 OBJ	=	$(SRC:srcs/%.c=%.o)
 

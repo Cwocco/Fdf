@@ -12,6 +12,7 @@
 
 #include "fdf.h"
 #include "libft.h"
+
 void fdf_error(int n)
 {
 	if (n == 1)

@@ -14,6 +14,20 @@
 #include "mlx.h"
 #include <stdlib.h>
 
+int xpose_hook(void *param)
+{
+	t_map *map;
+	t_env *env;
+
+	map = get_map("maps/42.fdf");
+	env = (t_env *)param;
+	env->map = map;
+	projection_iso(map);
+	drawer(env);
+	display_img(env);
+	return (0);
+}
+
 int exit_hook(int keycode, void *param)
 {
 	(void)param;

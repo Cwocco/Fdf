@@ -21,8 +21,8 @@ int init_windows(t_env *env, t_pos size, char *win_name)
 	env->img.img_ptr = mlx_new_image(env->mlx, size.x, size.y);
 	env->img.data = mlx_get_data_addr(env->img.img_ptr, &env->img.bpp, 
 		&env->img.size, &env->img.endian);
-//	mlx_expose_hook(env->win.win_mlx, &xpose_hook, 0);
-	mlx_key_hook(env->win.win_mlx, &exit_hook, 0);
+	mlx_expose_hook(env->win.win_mlx, &xpose_hook, (void *)env);
+	mlx_key_hook(env->win.win_mlx, &exit_hook, (void *)env);
 //	mlx_mouse_hook(env->win.win_mlx, &hook_mouse, 0);
 	return (1);
 }
