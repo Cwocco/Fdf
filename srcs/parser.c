@@ -15,6 +15,7 @@
 #include <fcntl.h>
 #include "libft.h"
 
+
 static t_map	*get_map_fromlst(t_map *map, t_list *list)
 {
 	int			x;
@@ -33,8 +34,8 @@ static t_map	*get_map_fromlst(t_map *map, t_list *list)
 		{
 			map->points[y][x].x = x;
 			map->points[y][x].y = y;
-		//	if (!ft_strdigit(((char **)list->content)[x]))
-			//	fdf_error(4);
+			if (!ft_strdigit(((char **)list->content)[x]))
+				fdf_error(4);
 			map->points[y][x].z = ft_atoi(((char **)list->content)[x]);
 //			ft_putstr(&((char*)list->content)[0]);
 			x++;
@@ -52,36 +53,30 @@ t_map			*get_map(char *path)
 	t_list		*list;
 	t_map		*map;
 
-	ft_putendl("Getmap test");
-	ft_putendl("Test1");
 	if (!(map = (t_map *)malloc(sizeof(t_map))))
 		fdf_error(2);
-	ft_putendl("Test2");
 	map->width	= 0;
 	map->height = 0;
 	if (!(fd = open(path, O_RDONLY)))
 		fdf_error(1);
 	while (get_next_line(fd, &path) > 0)
 	{
-		ft_putendl(path);
 		split = ft_strsplit(path, ' ');
 		ft_strdel(&path);
-		if (map->height++ == 0)
+		if (!(map->height++ == 0))
 		{
 			map->width = ptr_strlen(split);
-			ft_putendl("Test3");
 			if (!(list = ft_lstnew(&split, sizeof(char **))))
 				fdf_error(2);
-			ft_putendl("Test4");
-			//ft_putstr((char*)list);
+			list->content = (void *)split;
 		}
 		else 
+		{
 			ft_lstadd(&list, ft_lstnew(&split, sizeof(char **)));
-		ft_putendl("Test5");
-		
+			list->content = (void *)split;
+		}
 	}
 	close(fd);
-	ft_putendl("Test6");
 	return (get_map_fromlst(map, list));
 }
 

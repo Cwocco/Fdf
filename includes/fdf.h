@@ -26,9 +26,9 @@ typedef struct s_2dpos
 			
 typedef struct s_points
 {
-	int			x;
-	int 		y;
-	int 		z;
+	double			x;
+	double 		y;
+	double 		z;
 	int 		z_color;
 	t_2dpos		project;
 }				t_points;

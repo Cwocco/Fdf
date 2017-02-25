@@ -6,7 +6,7 @@
 #    By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/18 01:09:31 by ada-cunh          #+#    #+#              #
-#    Updated: 2017/02/22 03:20:09 by ada-cunh         ###   ########.fr        #
+#    Updated: 2017/02/25 07:15:56 by ada-cunh         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -39,12 +39,13 @@ $(NAME):
 		gcc -o $(NAME) $(OBJ) $(L)
 
 clean: 
+	make -C libft/
 	rm -f $(OBJ)
 
 fclean: clean
+	make -C ./libft fclean
 	rm -f $(NAME)
-	make -C libft/ fclean
-	make -C minilibx_macos/ fclean 
+	make -C minilibx_macos/
 
 re: fclean all
 
