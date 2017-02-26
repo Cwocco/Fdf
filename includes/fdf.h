@@ -18,6 +18,13 @@
 # include "get_next_line.h"
 # include <math.h>
 
+typedef struct s_color
+{
+	int r;
+	int g;
+	int b;
+}				t_color;
+
 typedef struct s_2dpos
 {
 	double 		x;
@@ -26,10 +33,10 @@ typedef struct s_2dpos
 			
 typedef struct s_points
 {
-	double			x;
+	double		x;
 	double 		y;
 	double 		z;
-	int 		z_color;
+	int 		color;
 	t_2dpos		project;
 }				t_points;
             
@@ -38,7 +45,6 @@ typedef struct 	s_map
 	t_points	**points;
 	int 		width;
 	int 		height;
-	int 		len;
 	t_2dpos		min;
 	t_2dpos		max;
 
@@ -46,8 +52,8 @@ typedef struct 	s_map
 			
 typedef struct	s_pos
 {
-	int 		x;
-	int		 	y;
+	double		x;
+	double		y;
 }				t_pos;
 			
 typedef struct	s_win
@@ -67,7 +73,8 @@ typedef struct 	s_img
 
 typedef struct	s_env
 {
-	void	*env;
+	//void	*env;
+	char	*path;
 	void	*mlx;
 	t_win	win;
 	t_map	*map;
@@ -76,11 +83,11 @@ typedef struct	s_env
 
 }				t_env;
 
+int		get_color(int z);
 void	fdf_error(int n);
 t_map 	*get_map(char *path);
-int 	init_windows(t_env *env, t_pos size, char *win_name);
+int init_windows(t_env *env, int width, int height);
 int 	exit_hook(int keycode, void *param);
-//int 	get_color(t_points *p1, t_points *p2);
 void	drawer(t_env *env);
 void	projection_iso(t_map *map);
 void	display_img(t_env *env);

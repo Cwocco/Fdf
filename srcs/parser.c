@@ -14,8 +14,7 @@
 #include "mlx.h"
 #include <fcntl.h>
 #include "libft.h"
-
-
+ 
 static t_map	*get_map_fromlst(t_map *map, t_list *list)
 {
 	int			x;
@@ -26,23 +25,24 @@ static t_map	*get_map_fromlst(t_map *map, t_list *list)
 	y = 0;
 	while (list && map)
 	{
-		ft_putendl(((char **)list->content)[0]);
+		//ft_putendl(((char **)list->content)[0]);
 		if (!(map->points[y] = (t_points *)malloc(sizeof(t_points) * map->width)))
 			fdf_error(2);
 		x = 0;
 		while (x < map->width)
 		{
-			map->points[y][x].x = x;
-			map->points[y][x].y = y;
+			map->points[y][x].x = x * 10;
+			map->points[y][x].y = y * 10;
 			if (!ft_strdigit(((char **)list->content)[x]))
 				fdf_error(4);
-			map->points[y][x].z = ft_atoi(((char **)list->content)[x]);
+			map->points[y][x].z = ft_atoi(((char **)list->content)[x]) / 2;
 //			ft_putstr(&((char*)list->content)[0]);
 			x++;
 		}
 		y++;
 		list = list->next;
 	}
+	free(list);
 	return (map);
 }
 
@@ -63,7 +63,7 @@ t_map			*get_map(char *path)
 	{
 		split = ft_strsplit(path, ' ');
 		ft_strdel(&path);
-		if (!(map->height++ == 0))
+		if (map->height++ == 0)
 		{
 			map->width = ptr_strlen(split);
 			if (!(list = ft_lstnew(&split, sizeof(char **))))

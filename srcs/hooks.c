@@ -20,7 +20,7 @@ int xpose_hook(void *param)
 	t_env *env;
 
 	env = (t_env *)param;
-	map = get_map("maps/42.fdf");
+	map = get_map(env->path);
 	env->map = map;
 	projection_iso(map);
 	drawer(env);

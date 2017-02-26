@@ -12,10 +12,10 @@
 
 #include "fdf.h"
 #include "mlx.h"
+#include "get_next_line.h"
 #include <math.h>
  
 
- /*
 static void	fdf_update_minmax(t_map *map, t_points *points)
 {
 	t_2dpos	*proj;
@@ -36,8 +36,8 @@ static void	fdf_update_minmax(t_map *map, t_points *points)
 		map->max.y = proj->y > map->max.y ? proj->y : map->max.y;
 	}
 }
-*/
 
+/*
 static void		get_new_max(t_map *map, t_points *points)
 {
 	t_2dpos		*proj;
@@ -72,7 +72,7 @@ static void		get_new_min(t_map *map, t_points *points)
 	}
 	get_new_max(map, points);
 }
-
+*/
 
 void			projection_iso(t_map *map)
 {
@@ -88,10 +88,11 @@ void			projection_iso(t_map *map)
 		while (y < map->height)
 		{
 			pts = &map->points[y][x];
+			
 			proj_pts = &pts->project;
 			proj_pts->x = (sqrt(2) / 2.0) * (pts->x - pts->y);
-			proj_pts->y = (sqrt(2 / 3.0) * pts->z) - ((1.0 / sqrt(6)) * (pts->x + pts->y));
-			get_new_min(map, pts);
+			proj_pts->y = (sqrt(2 / 3.0) * -1 * pts->z) - ((1.0 / sqrt(6)) * (pts->x + pts->y));
+			fdf_update_minmax(map, pts);
 			y++;
 		}
 		x++;

@@ -17,27 +17,32 @@
 
 static void		put_pixel(t_env *env, t_points *points)
 {
-	/*
+	
 	int			pts;
+	int 		color;
 
-	pts = (points->project.x * 4) + (points->project.y * env->img.size);
-	env->img.data[pts] = color;
-	env->img.data[pts++] = color >> 8;
-	env->img.data[pts++] = color >> 16;
-*/
-	int	i;
-	int	x;
-	int	y;
-
-	i = 0;
-	x = floor(points->project.x) * env->img.bpp / 8;
-	y = floor(points->project.y) * env->img.size;
-	env->img.data[x + y + i++] = mlx_get_color_value(env->mlx, 255);
-	env->img.data[x + y + i++] = mlx_get_color_value(env->mlx, 255);
-	env->img.data[x + y + i++] = mlx_get_color_value(env->mlx, 255);
-	env->img.data[x + y + i++] = mlx_get_color_value(env->mlx, 0);
+	color = get_color(points->z);
+	pts = (floor(points->project.x) * env->img.bpp / 8) +
+	 (floor(points->project.y) * env->img.size);
+	env->img.data[pts++] =  mlx_get_color_value(env->mlx, color);
+	env->img.data[pts++] = mlx_get_color_value(env->mlx, color >> 8);
+	env->img.data[pts++] = mlx_get_color_value(env->mlx, color >> 16);
+	env->img.data[pts++] = mlx_get_color_value(env->mlx, color >> 20);
 }
 
+static void		normalize_funct(t_points *points, t_env *env)
+{
+//	v.x = v.x / longueur;
+//	v.y = v.y / longueur;
+	t_2dpos *min;
+	t_2dpos *max;
+	
+	min = &env->map->min;
+  	max = &env->map->max;
+  	points->project.x = ((points->project.x - min->x) / (max->x - min->x)) * (env->win.size.x - 50);
+	points->project.y = ((points->project.y - min->y) / (max->y - min->y)) * (env->win.size.y - 50);
+		
+}
 
 static void		draw_line(t_env *env, t_points *p1, t_points *p2)
 {
@@ -46,7 +51,7 @@ static void		draw_line(t_env *env, t_points *p1, t_points *p2)
 	t_points	pts;
 	int			step;
 
-	d.x = (int)p2->project.x - (int)p1->project.x;
+	d.x = p2->project.x - p1->project.x;
 	d.y = p2->project.y - p1->project.y;
 	step = fabs(d.x) > fabs(d.y) ? fabs(d.x) : fabs(d.y);
 	incr.x = d.x / (float)step;
@@ -61,36 +66,14 @@ static void		draw_line(t_env *env, t_points *p1, t_points *p2)
 	}
 }
 
-
-static void		normalize_funct(t_points *points, t_env *env)
-{
-//	v.x = v.x / longueur;
-//	v.y = v.y / longueur;
-	t_2dpos *min;
-	t_2dpos *max;
-	
-	min = &env->map->min;
-  	max = &env->map->max;
-	//points->project.x  = points->project.x / (env->map->max.x - env->map->min.x)
-	 //	* (env->win.size.x -1);
-  	points->project.x = ((points->project.x - min->y) / (max->y - min->y)) * (env->win.size.y - 1) - ((min->x - min->y) / (max->y - min->y) * (env->win.size.y - 1));
-	points->project.y = points->project.y / (env->map->max.y - env->map->min.y) 
-		* (env->win.size.y - 1);
-		
-}
-
 void			drawer(t_env *env)
 {
 	int			x;
 	int			y;
 	t_points	**map_pts;
-//	t_points	*p1;
-//	t_points	*p2;
 
-	x = 0;
 	map_pts = env->map->points;
-//	p1 = p1->z_color;
-//	p1 = p2->z_color;
+	x = 0;
 	while (x < env->map->width)
 	{
 		y = 0;

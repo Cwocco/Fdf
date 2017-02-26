@@ -6,7 +6,7 @@
 #    By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/18 01:09:31 by ada-cunh          #+#    #+#              #
-#    Updated: 2017/02/25 07:15:56 by ada-cunh         ###   ########.fr        #
+#    Updated: 2017/02/25 22:08:34 by ada-cunh         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -24,9 +24,9 @@ SRC	=	srcs/error.c \
 		srcs/parser.c \
 		srcs/main.c \
 		srcs/hooks.c \
-		srcs/color.c \
 		srcs/projection.c \
 		srcs/draw.c \
+		srcs/color.c \
 
 OBJ	=	$(SRC:srcs/%.c=%.o)
 
@@ -43,9 +43,7 @@ clean:
 	rm -f $(OBJ)
 
 fclean: clean
-	make -C ./libft fclean
 	rm -f $(NAME)
-	make -C minilibx_macos/
 
 re: fclean all
 
