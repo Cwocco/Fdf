@@ -27,6 +27,7 @@ SRC	=	srcs/error.c \
 		srcs/projection.c \
 		srcs/draw.c \
 		srcs/color.c \
+		srcs/zoom.c \
 
 OBJ	=	$(SRC:srcs/%.c=%.o)
 

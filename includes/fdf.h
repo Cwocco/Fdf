@@ -18,12 +18,12 @@
 # include "get_next_line.h"
 # include <math.h>
 
-typedef struct s_color
-{
-	int r;
-	int g;
-	int b;
-}				t_color;
+
+# define ESC		53
+# define ZOOM_OUT	78
+# define ZOOM_IN	69
+# define Z_OUT 		1.2
+# define Z_IN 		0.9
 
 typedef struct s_2dpos
 {
@@ -36,6 +36,8 @@ typedef struct s_points
 	double		x;
 	double 		y;
 	double 		z;
+//	int 		cx;
+//	int 		cy;	
 	int 		color;
 	t_2dpos		project;
 }				t_points;
@@ -83,10 +85,12 @@ typedef struct	s_env
 
 }				t_env;
 
+//void 	get_center(t_map *map);
+//void 	zoom_map(t_env *env, int zoom);
 int		get_color(int z);
 void	fdf_error(int n);
 t_map 	*get_map(char *path);
-int init_windows(t_env *env, int width, int height);
+int 	init_windows(t_env *env, int width, int height, char *win_name);
 int 	exit_hook(int keycode, void *param);
 void	drawer(t_env *env);
 void	projection_iso(t_map *map);

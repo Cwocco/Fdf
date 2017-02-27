@@ -14,21 +14,21 @@
 int		get_color(int z)
 {
 	int colors;
+	int red;
 
+	red = z % 255 + 40;
 	colors = 0;
 	if (z < 0)
 		colors = 0x000D1CE4;
 	else if (z == 0)
 		colors = 0x00FFFFFF;
-	else if (z > 0 && z <= 30)
-		colors = 0x0030C253;
-	else if (z >= 31 && z <= 50)
-		colors = 0x00E3B740;
-//	else if (z >= 40 && z <= 50)
-//		colors = 0x00875910;
-//	else if (z > 50)
-//		colors = 0x00582900;
-//	else 
-//		colors = 0x00FF0000;
+	else if (z > 0 && z <= 5)
+		colors = 0x00300053 + (red << 16);
+	else if (z >= 2 && z <= 5)
+		colors = 0x00E3B740 + (red << 16);
+	else if (z >= 51 && z <= 70)
+		colors = 0x00582900 + (red << 16);
+	else if (z > 70)
+		colors = 0x00FFFFFF;
 	return (colors);
 }

@@ -14,10 +14,10 @@
 #include "mlx.h"
 #include <stdlib.h>
 
-int xpose_hook(void *param)
+int			xpose_hook(void *param)
 {
-	t_map *map;
-	t_env *env;
+	t_map	*map;
+	t_env	*env;
 
 	env = (t_env *)param;
 	map = get_map(env->path);
@@ -28,10 +28,14 @@ int xpose_hook(void *param)
 	return (0);
 }
 
-int exit_hook(int keycode, void *param)
+int			exit_hook(int keycode, void *param)
 {
 	(void)param;
-	if (keycode == 53)
+	if (keycode == ESC)
 		exit(1);
+	//else if (keycode == ZOOM_OUT)
+	//	zoom_map(env, keycode);
+	//else if (keycode == ZOOM_IN)
+	//	zoom_map(env, keycode);
 	return (0);
 }

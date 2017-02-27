@@ -13,11 +13,11 @@
 #include "fdf.h"
 #include "mlx.h"
 
-int init_windows(t_env *env, int width, int height)
+int init_windows(t_env *env, int width, int height, char *win_name)
 {
 	if (!(env->mlx = mlx_init()))
 		return (0);
-	env->win.win_mlx = mlx_new_window(env->mlx, width, height, "FDF");
+	env->win.win_mlx = mlx_new_window(env->mlx, width, height, win_name);
 	env->img.img_ptr = mlx_new_image(env->mlx, width, height);
 	env->img.data = mlx_get_data_addr(env->img.img_ptr, &env->img.bpp, 
 		&env->img.size, &env->img.endian);

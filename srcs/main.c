@@ -17,7 +17,7 @@ int main(int argc, char **argv)
 {
 	t_env env;
 
-	if (argc < 3 || !init_windows(&env, ft_atoi(argv[2]), ft_atoi(argv[3])))
+	if (argc < 3 || !init_windows(&env, ft_atoi(argv[1]), ft_atoi(argv[2]), argv[0]))
 		return (1);
 	env.path = argv[1];
 	mlx_loop(env.mlx);

@@ -15,7 +15,7 @@
 #include <math.h>
 
 
-static void		put_pixel(t_env *env, t_points *points)
+void			put_pixel(t_env *env, t_points *points)
 {
 	
 	int			pts;
@@ -30,12 +30,12 @@ static void		put_pixel(t_env *env, t_points *points)
 	env->img.data[pts++] = mlx_get_color_value(env->mlx, color >> 20);
 }
 
-static void		normalize_funct(t_points *points, t_env *env)
+void			normalize_funct(t_points *points, t_env *env)
 {
 //	v.x = v.x / longueur;
 //	v.y = v.y / longueur;
-	t_2dpos *min;
-	t_2dpos *max;
+	t_2dpos		*min;
+	t_2dpos		*max;
 	
 	min = &env->map->min;
   	max = &env->map->max;
@@ -44,7 +44,7 @@ static void		normalize_funct(t_points *points, t_env *env)
 		
 }
 
-static void		draw_line(t_env *env, t_points *p1, t_points *p2)
+void			draw_line(t_env *env, t_points *p1, t_points *p2)
 {
 	t_2dpos		d;
 	t_2dpos		incr;
@@ -62,7 +62,8 @@ static void		draw_line(t_env *env, t_points *p1, t_points *p2)
 	{
 		pts.project.x += incr.x;
 		pts.project.y += incr.y;
-		put_pixel(env, &pts);
+		if (pts.project.x >= 0 && pts.project.x < env->map->width && pts.project.y >= 0 && pts.project.y < env->map->height)
+			put_pixel(env, &pts);
 	}
 }
 
@@ -80,7 +81,6 @@ void			drawer(t_env *env)
 		while (y < env->map->height)
 		{
 			normalize_funct(&map_pts[y][x], env);
-			put_pixel(env, &map_pts[y][x]);
 			if (x > 0)
 				draw_line(env, &map_pts[y][x], &map_pts[y][x - 1]);
 			if (y > 0)
@@ -90,87 +90,12 @@ void			drawer(t_env *env)
 		x++;
 	}
 }
-/*
-static void	fdf_put_pixel_img(t_points *point, t_env *env)
-{
-	int	i;
-	int	x;
-	int	y;
 
-	if (point->project.x < env->win.size.x
-		&& point->project.y < env->win.size.y
-		&& point->project.x >= 0
-		&& point->project.y >= 0)
-	{
-		i = 0;
-		x = floor(point->project.x) * env->img.bpp / 8;
-		y = floor(point->project.y) * env->img.size;
-		env->img.data[x + y + i++] = mlx_get_color_value(env->mlx, 255);
-		env->img.data[x + y + i++] = mlx_get_color_value(env->mlx, 255);
-		env->img.data[x + y + i++] = mlx_get_color_value(env->mlx, 255);
-		env->img.data[x + y + i++] = mlx_get_color_value(env->mlx, 0);
-	}
-}
-
-static void	fdf_normalize_point(t_points *point, t_env* env)
-{
-	t_2dpos	*min;
-	t_2dpos	*max;
-
-	min = &env->map->min;
-	max = &env->map->max;
-	point->project.x = ((((point->project.x - min->x) / (max->x - min->x))) * (env->win.size.x - 1)) - ((min->x - min->x) / (max->x - min->x) * (env->win.size.x- 1));
-	point->project.y = (((point->project.y - min->x) / (max->x - min->x))) * (env->win.size.x - 1);
-}
-
-static void	fdf_draw_line(t_points *p1, t_points *p2, t_env *env)
-{
-	int		step;
-	t_2dpos	d;
-	t_2dpos	incr;
-	t_points	point;
-
-	d.x = p2->project.x - p1->project.x;
-	d.y = p2->project.y - p1->project.y;
-	step = fabs(d.x) > fabs(d.y) ? fabs(d.x) : fabs(d.y);
-	incr.x = d.x / (float)step;
-	incr.y = d.y / (float)step;
-	d.x = 0;
-	point = *p1;
-	while (d.x++ < step)
-	{
-		point.project.x += incr.x;
-		point.project.y += incr.y;
-		fdf_put_pixel_img(&point, env);
-	}
-}
-
-void	fdf_draw_img(t_env *env)
-{
-	t_points	**points;
-	int		x;
-	int		y;
-
-	x = 0;
-	points = env->map->points;
-	while (x < env->map->width)
-	{
-		y = 0;
-		while (y < env->map->height)
-		{
-			fdf_normalize_point(&points[y][x], env);
-			fdf_put_pixel_img(&points[y][x], env);
-			if (x > 0)
-				fdf_draw_line(&points[y][x], &points[y][x - 1], env);
-			if (y > 0)
-				fdf_draw_line(&points[y][x], &points[y - 1][x], env);
-			y++;
-		}
-		x++;
-	}
-}
- */
 void display_img(t_env *env)
 {
 	mlx_put_image_to_window(env->mlx, env->win.win_mlx, env->img.img_ptr, 0, 0);
+	//mlx_destroy_image(env->mlx, env->img.img_ptr);
+	//mlx_new_image(env->mlx, env->win.size.x, env->win.size.y);
+	//env->img.data = mlx_get_data_addr(env->img.img_ptr, &env->img.bpp, 
+	//	&env->img.size, &env->img.endian);
 }

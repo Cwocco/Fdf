@@ -15,10 +15,9 @@
 #include "get_next_line.h"
 #include <math.h>
  
-
-static void	fdf_update_minmax(t_map *map, t_points *points)
+static void		get_minmax(t_map *map, t_points *points)
 {
-	t_2dpos	*proj;
+	t_2dpos		*proj;
 
 	proj = &points->project;
 	if (!points->x && !points->y)
@@ -37,43 +36,6 @@ static void	fdf_update_minmax(t_map *map, t_points *points)
 	}
 }
 
-/*
-static void		get_new_max(t_map *map, t_points *points)
-{
-	t_2dpos		*proj;
-
-	proj = &points->project;
-	if (points && map)
-	{
-		map->max.x = proj->x > map->max.x ? proj->x : map->max.x;
-		map->max.y = proj->y > map->min.y ? proj->y : map->max.y;
-	}
-	else
-	{
-		map->max.x = proj->x;
-		map->max.y = proj->y;
-	}
-}
-
-static void		get_new_min(t_map *map, t_points *points)
-{
-	t_2dpos		*proj;
-
-	proj = &points->project;
-	if (points && map)
-	{
-		map->min.x = proj->x < map->min.x ? proj->x : map->min.x;
-		map->min.y = proj->y < map->min.y ? proj->y : map->min.y;
-	}
-	else
-	{
-		map->min.x = proj->x;
-		map->min.y = proj->y;
-	}
-	get_new_max(map, points);
-}
-*/
-
 void			projection_iso(t_map *map)
 {
 	int			x;
@@ -87,12 +49,11 @@ void			projection_iso(t_map *map)
 		y = 0;
 		while (y < map->height)
 		{
-			pts = &map->points[y][x];
-			
+			pts = &map->points[y][x];	
 			proj_pts = &pts->project;
 			proj_pts->x = (sqrt(2) / 2.0) * (pts->x - pts->y);
 			proj_pts->y = (sqrt(2 / 3.0) * -1 * pts->z) - ((1.0 / sqrt(6)) * (pts->x + pts->y));
-			fdf_update_minmax(map, pts);
+			get_minmax(map, pts);
 			y++;
 		}
 		x++;
