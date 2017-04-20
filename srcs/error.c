@@ -6,14 +6,14 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 01:36:27 by ada-cunh          #+#    #+#             */
-/*   Updated: 2017/02/21 01:42:39 by ada-cunh         ###   ########.fr       */
+/*   Updated: 2017/02/27 06:29:29 by ada-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "libft.h"
 
-void fdf_error(int n)
+void	fdf_error(int n)
 {
 	if (n == 1)
 	{
@@ -33,6 +33,6 @@ void fdf_error(int n)
 	else if (n == 4)
 	{
 		ft_putendl("Map format not valid.");
-		exit (-1);
+		exit(-1);
 	}
 }

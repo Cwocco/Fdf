@@ -6,13 +6,13 @@
 #    By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/18 01:09:31 by ada-cunh          #+#    #+#              #
-#    Updated: 2017/02/25 22:08:34 by ada-cunh         ###   ########.fr        #
+#    Updated: 2017/04/20 14:16:44 by ada-cunh         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = fdf
 
-FLAGS	= -Wall -Wextra -Werror -g -O3
+FLAGS	= -Wall -Wextra -Werror -g
 
 I = -I./includes \
 	-I./libft/includes \
@@ -27,7 +27,6 @@ SRC	=	srcs/error.c \
 		srcs/projection.c \
 		srcs/draw.c \
 		srcs/color.c \
-		srcs/zoom.c \
 
 OBJ	=	$(SRC:srcs/%.c=%.o)
 
@@ -40,7 +39,6 @@ $(NAME):
 		gcc -o $(NAME) $(OBJ) $(L)
 
 clean: 
-	make -C libft/
 	rm -f $(OBJ)
 
 fclean: clean
