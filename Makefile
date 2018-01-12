@@ -6,13 +6,13 @@
 #    By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/18 01:09:31 by ada-cunh          #+#    #+#              #
-#    Updated: 2017/04/20 14:16:44 by ada-cunh         ###   ########.fr        #
+#    Updated: 2017/02/28 02:40:15 by ada-cunh         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = fdf
 
-FLAGS	= -Wall -Wextra -Werror -g
+FLAGS	= -Wall -Wextra -Werror -g -O3
 
 I = -I./includes \
 	-I./libft/includes \
